@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "macbook"
+  },
+
+  {
+    "id": 2,
+    "name": "ipad"
+  },
+
+  {
+    "id": 3,
+    "name": "iphone"
+  }
+]

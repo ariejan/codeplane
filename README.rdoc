@@ -1,0 +1,166 @@
+= Codeplane
+
+Client library and CLI to handle Git repositories on Codeplane.
+For more about Codeplane see http://codeplane.com.
+
+== Installation
+
+  gem install codeplane
+
+== Usage
+
+=== Ruby wrapper
+
+First, you'll need to set up your username and API key. You can discover this information by accessing your account at http://codeplane.com/account.
+
+  Codeplane.configure do |config|
+    config.username = "john"
+    config.api_key = "d09513d5bab641f7ff0b"
+  end
+
+Then you can simply instantiate a new Codeplane::Client object.
+
+  cp = Codeplane::Client.new
+
+==== Repositories
+
+List repositories you have access:
+
+  cp.repositories.all
+
+Create new repository:
+
+  myrepo = cp.repositories.build(:name => "myrepo")
+  myrepo.save
+
+  # or
+
+  myrepo = cp.repositories.create(:name => "myrepo")
+
+Destroy a repository <b>created by you</b>:
+
+  myrepo.destroy if myrepo.mine?
+
+==== SSH public keys
+
+List SSH public keys:
+
+  cp.public_keys.all
+
+Add a new public key:
+
+  mykey = cp.public_keys.build(:name => "Macbook")
+  mykey.save
+
+  # or
+
+  mykey = cp.public_keys.create(:name => "Macbook")
+
+Destroy a public key:
+
+  mykey.destroy
+
+==== Collaborators
+
+List collaborators:
+
+  users = myrepo.collaborators.all
+
+Invite new collaborators:
+
+  myrepo.collaborators.invite("john@doe.com")
+
+Revoke permissions on a repository:
+
+  myrepo.collaborators.remove(users.first.email)
+
+=== Command-line
+
+The +codeplane+ gem also comes with a command line.
+
+  $ codeplane help
+
+You can use it to manage repositories, SSH public keys and collaborators.
+
+First, you have to set up your credentials. Just run `codeplane setup` and
+follow the on-screen instructions.
+
+==== Repositories
+
+  # List repositories
+  $ codeplane repo
+  some-repo     => git@codeplane.com:john/some-repo.git
+  server-confs  => git@codeplane.com:john/server-confs.git
+  app           => git@codeplane.com:mary/server-confs.git
+
+  # Show info about repository
+  $ codeplane repo:info some-repo
+  Name: some-repo
+  Git url: git@codeplane.com:john/some-repo.git
+  Usage: 1.5MB
+
+  # Create a new repository called `my-new-repo`
+  $ codeplane repo:create my-new-repo
+  Your clone uri is git@codeplane.com:john/my-new-repo.git
+  Give it some time before cloning it.
+
+  # Remove the `my-new-repo` repository
+  $ codeplane repo:remove my-new-repo
+  OK
+
+==== SSH Public Keys
+
+  # List all public keys
+  $ codeplane auth
+  example.com    # ba:b2:51:45:68:68:d8:2c:11:02:c8:0c:6b:07:3c:00
+
+  # Add a new public key (~/.ssh/id_rsa.pub) named "Macbook"
+  $ codeplane auth:add Macbook ~/.ssh/id_rsa.pub
+  Your SSH public key 'Macbook' was added
+
+  # Remove a public key. You need to provide the id
+  # returned by `codeplane ssh`.
+  $ codeplane auth:remove Macbook
+  The SSH key 'Macbook' has been removed
+
+==== Collaborators
+
+  # List all collaborators on a given repository
+  $ codeplane user some-repo
+  Mary Doe    # mary@doe.com
+  Tim Doe     # time@doe.com
+
+  # Add new collaborator
+  $ codeplane user:add some-repo paul@doe.com
+  We sent an invitation to paul@doe.com
+
+  # Remove collaborator
+  $ codeplane user:add some-repo paul@doe.com
+  We revoked paul@doe.com permissions on 'some-repo'
+
+== Maintainer
+
+* Codeplane (http://codeplane.com)
+
+== License
+
+(The MIT License)
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
