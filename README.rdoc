@@ -82,7 +82,7 @@ The +codeplane+ gem also comes with a command line.
 
 You can use it to manage repositories, SSH public keys and collaborators.
 
-First, you have to set up your credentials. Just run `codeplane setup` and
+First, you have to set up your credentials. Just run <tt>codeplane setup</tt> and
 follow the on-screen instructions.
 
 ==== Repositories
