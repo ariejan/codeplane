@@ -30,7 +30,7 @@ module Codeplane
 
       def add
         repo = client.repositories.create(:name => args.first)
-        say_and_exit("Your Git url is #{repo.uri}".green) if repo.valid?
+        say_and_exit("Your Git url is #{repo.uri}\nGive it some time before cloning it.".green) if repo.valid?
         say_and_exit(bullets(repo.errors).red, 1)
       end
 

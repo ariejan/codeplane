@@ -11,7 +11,7 @@ describe Codeplane::CLI::Repo do
     it "displays message" do
       subject.client.repositories.stub :create => stub(:valid? => true, :uri => "repo.git")
       expect { subject.add }.to raise_error(SystemExit)
-      Codeplane::CLI.stdout.should include("Your Git url is repo.git")
+      Codeplane::CLI.stdout.should include("Your Git url is repo.git\nGive it some time before cloning it.")
     end
 
     it "displays error message" do

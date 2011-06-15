@@ -106,7 +106,9 @@ follow the on-screen instructions.
 
   # Remove the `my-new-repo` repository
   $ codeplane repo:remove my-new-repo
-  OK
+  $ codeplane repo:remove test
+  Do you want to continue? (yes/no): yes
+  The repository 'my-new-repo' has been removed
 
 ==== SSH Public Keys
 
