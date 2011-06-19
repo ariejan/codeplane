@@ -100,7 +100,7 @@ follow the on-screen instructions.
   Usage: 1.5MB
 
   # Create a new repository called `my-new-repo`
-  $ codeplane repo:create my-new-repo
+  $ codeplane repo:add my-new-repo
   Your clone uri is git@codeplane.com:john/my-new-repo.git
   Give it some time before cloning it.
 
