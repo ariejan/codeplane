@@ -10,7 +10,7 @@ module Codeplane
       end
 
       def base
-        Codeplane::CLI.stdout << "Codeplane #{Codeplane::Version::STRING}"
+        say_and_exit "Codeplane #{Codeplane::Version::STRING}"
       end
     end
   end
