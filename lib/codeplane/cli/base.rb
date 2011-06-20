@@ -19,7 +19,7 @@ module Codeplane
       end
 
       def run(command)
-        raise Codeplane::UnauthorizedError unless Codeplane::CLI.credentials?
+        raise Codeplane::UnauthorizedError unless kind_of?(Codeplane::CLI::Setup) || Codeplane::CLI.credentials?
         self.class.help & exit(1) unless respond_to?(command)
         send(command)
       end

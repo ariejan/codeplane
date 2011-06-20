@@ -6,6 +6,34 @@ describe Codeplane::CLI::Base do
     Codeplane::CLI.stderr = ""
   end
 
+  describe "#run" do
+    it "raises unauthorized exception when credentials aren't set" do
+      Codeplane::CLI.stub :credentials? => false
+
+      expect {
+        Codeplane::CLI::Repo.new([]).run("base")
+      }.to raise_error(Codeplane::UnauthorizedError)
+    end
+
+    it "executes command when credentials are set" do
+      Codeplane::CLI.stub :credentials? => true
+      Codeplane::CLI::Repo.any_instance.should_receive(:base)
+
+      expect {
+        Codeplane::CLI::Repo.new([]).run("base")
+      }.to_not raise_error
+    end
+
+    it "executes command when running setup" do
+      Codeplane::CLI.stub :credentials? => true
+      Codeplane::CLI::Setup.any_instance.should_receive(:base)
+
+      expect {
+        Codeplane::CLI::Setup.new([]).run("base")
+      }.to_not raise_error
+    end
+  end
+
   describe "#confirmed?" do
     subject { Codeplane::CLI::Base.new }
 
