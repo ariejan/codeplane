@@ -3,6 +3,6 @@ module Codeplane
     MAJOR = 0
     MINOR = 1
     PATCH = 0
-    STRING = "#{MAJOR}.#{MINOR}.#{PATCH}.beta2"
+    STRING = "#{MAJOR}.#{MINOR}.#{PATCH}.beta3"
   end
 end
