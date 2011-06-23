@@ -3,6 +3,27 @@ module Codeplane
     class Help < Base
       def self.help
         Codeplane::CLI.stdout.write <<-TEXT.strip_heredoc
+          == Getting started
+
+          Hi! Thanks for using Codeplane. Before you get started,
+          you need to retrieve your API key.
+
+          Just go to http://codeplane.com/account and check the "Integration"
+          section. Then you can set up your credentials by running the
+          following command:
+
+            $ codeplane setup
+
+          Inform your username and API key and you're ready to go!
+          Your credentials will be saved at ~/.codeplane and chmod'ed as 0600.
+
+          WARNING: Do not distribute these credentials or anyone will be able
+          to manage your stuff, including destroying things. If you ever suspect
+          that your API key is being used without your permission, go to
+          http://codeplane.com/account and generate a new API key.
+
+          If you're having a bad time, you can always contact us at team@codeplane.com.
+
           == Help
              codeplane help                         #{"# list complete help".gray}
              codeplane help [NAME]                  #{"# list help for specific command".gray}
