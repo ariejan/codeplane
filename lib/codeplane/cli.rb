@@ -32,7 +32,7 @@ module Codeplane
     rescue SystemExit => error
       raise error
     rescue Codeplane::UnauthorizedError
-      stderr << "\nWe couldn't authenticate you. Double check your credentials.\n".red
+      stderr << "\nWe couldn't authenticate you. Run `codeplane setup` to setup authentication or check your current authentication details in ~/.codeplane.\n".red
       exit(1)
     rescue Exception => error
       stderr << "\nSomething went wrong. Please try again!\n".red
